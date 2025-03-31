@@ -10,7 +10,7 @@ html {
   color: #000;
 }
 
-body {
+.body {
   font-size: 1.5rem;
 
   display: flex;
@@ -30,7 +30,7 @@ header {
 }
 
 
-main {
+.main {
     width: 80vh;
     height: 90vh;
 
@@ -40,7 +40,7 @@ main {
     flex-direction: column;
 
     padding: 2rem;
-    gap: 2rem;
+    gap: 1rem;
 
     border-right: solid black 5px;
     border-left: solid black 5px;
@@ -48,13 +48,15 @@ main {
 
 .taskForm {
   width: 90%;
-  height: 20%;
+  height: 30%;
 
   display: flex;
   justify-content: start;
   align-items: start;
   gap: 0.5rem;
   flex-direction: column;
+
+  border-bottom: solid black 3px;
 }
 
 form {
@@ -92,4 +94,28 @@ form {
 .inputButton:hover {
   background-color: green;
   scale: 105%;
+}
+
+.taskBox {
+  width: 100%;
+
+  display: flex;
+  justify-content: start;
+  align-items: start;
+  flex-direction: column;
+
+  padding: 1rem;
+  gap: 1rem;
+  padding-left: 2rem;
+
+  background-color: oldlace;
+  border: black dashed 3px;
+  border-radius: 5px;
+}
+
+
+.item {
+  padding: 0.5rem;
+
+  border-top: solid black 2px;
 }

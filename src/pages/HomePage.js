@@ -3,16 +3,16 @@ import AddItem from "../components/AddItem"
 
 const HomePage = () => {
   return (
-    <body>
+    <main className="body">
         <header>
             <h1>To Do List</h1>
         </header>
 
-        <main>
+        <section className="main">
             <AddItem/>
             <ToDoList/>
-        </main>
-    </body>
+        </section>
+    </main>
       
   )
 }

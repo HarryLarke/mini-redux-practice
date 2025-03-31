@@ -1,22 +1,37 @@
 import { useSelector } from "react-redux"
-import { selectAllItems } from "../features/itemsSlice"
+import { useGetItemsQuery } from "../features/api/apiSlice"
 
 const ToDoList = () => {
-  const items = useSelector(selectAllItems)
+  
+  const {
+    data: items,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+   } = useGetItemsQuery()
 
-  const renderedItems = items.map(item => 
-    <article
-    key={item.id}>
-      <h3>{item.task}</h3>
-      <p>{item.checked}</p>
-    </article>
-  )
+   console.log(items) 
+   console.log(isLoading) 
+  let content 
+  if(isLoading) {
+    content = <p>Loading...</p>
+  } else if (isSuccess) {
+    content = items?.map(item => 
+      <li className="item" key={item.id}>{item.task}</li>)
+    } else if (isError) {
+      content = <p>{error}</p>
+    }
+
+
 
 
   return (
-    <section>
+    <section className="taskBox">
       <h2>Tasks...</h2>
-      {renderedItems}
+      <ul  className="taskList">
+        {content}
+      </ul>
     </section>
   )
 }
