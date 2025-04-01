@@ -21,10 +21,13 @@ export const apiSlice = createApi({
         providesTags: ['Items']
     }),
         addItem: builder.mutation({
-            query: (item) => ({
+            query: (task) => ({
                 url: '/items',
                 method: 'POST',
-                body: item
+                body: {
+                    ...task,
+                    date: new Date().toISOString()
+                }
             }),
             invalidatesTags: ['Items']
         }),
