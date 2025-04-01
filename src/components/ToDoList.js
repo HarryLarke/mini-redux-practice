@@ -25,7 +25,7 @@ const ToDoList = () => {
         className="checkBox"
         checked={item.checked}
         id={item.id}
-        onChange={() => updateItem({...item, checked: !item.checked})}
+        onChange={() => updateItem({id: item.id, checked: !item.checked})}
         />
         {item.task}
         <button

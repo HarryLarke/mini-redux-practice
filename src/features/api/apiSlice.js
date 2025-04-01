@@ -37,15 +37,24 @@ export const apiSlice = createApi({
             invalidatesTags: ['Items']
         }),
         updateItem: builder.mutation({
-            query: (item) => ({
-                url: `/items/${item.id}`,
+            query: ({id, checked}) => ({
+                url: `/items/${id}`,
                 method: 'PATCH',
-                body: item
+                body: {checked}
             }),
-            invalidatesTags: ['Items']
+            async onQueryStarted({id, checked}, { dispatch, queryFufilled}) {
+                const patchResult = dispatch(
+                    apiSlice.util.updateQueryData('getItems', undefined, draft => {
+                        const item = draft.find(item => item.id === id)
+                        if(item) item.checked = checked  
+                    })
+                ) 
+                try {
+                    await queryFufilled
+                } catch {patchResult.undo()}
+            }
         }) 
         })
-
 
 })
 

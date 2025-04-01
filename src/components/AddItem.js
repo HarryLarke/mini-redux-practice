@@ -1,11 +1,9 @@
-import { useAddItemMutation, useGetItemsQuery } from "../features/api/apiSlice"
+import { useAddItemMutation } from "../features/api/apiSlice"
 import { useState } from "react"
-import { sub } from 'date-fns'
 import { nanoid } from "@reduxjs/toolkit"
 
 const AddItem = () => {
   const [ newItem, setNewItem ] = useState('')
-  const {  data: items } = useGetItemsQuery()
   const [addItem] = useAddItemMutation()
 
 
