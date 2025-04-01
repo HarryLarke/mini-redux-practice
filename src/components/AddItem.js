@@ -1,5 +1,7 @@
 import { useAddItemMutation, useGetItemsQuery } from "../features/api/apiSlice"
 import { useState } from "react"
+import { sub } from 'date-fns'
+import { nanoid } from "@reduxjs/toolkit"
 
 const AddItem = () => {
   const [ newItem, setNewItem ] = useState('')
@@ -9,7 +11,7 @@ const AddItem = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    addItem({ id: Number(items.length + 1), task: newItem, checked: false}) //Could  form bugs, may produce nanoid - use datefns to reorganise my data?
+    addItem({ id: nanoid, task: newItem, checked: false, date: new Date().toISOString()}) //Could  form bugs, may produce nanoid - use datefns to reorganise my data?
     setNewItem('')
   }
 

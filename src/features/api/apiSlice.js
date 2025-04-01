@@ -1,4 +1,7 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { sub } from "date-fns"
+
+
 
 export const apiSlice = createApi({
     reducerPath: 'api',
@@ -7,7 +10,14 @@ export const apiSlice = createApi({
     endpoints: (builder) => ({ 
         getItems: builder.query({
         query: () => '/items',
-        transformResponse: res => res.sort((a, b) => b.id - a.id),
+        transformResponse: responseData => {
+            let min = 0
+            const loadedItems = responseData.map(item => {
+                if(!item?.date) item.date = sub(new Date(), {minutes: min++}).toISOString()
+                    return item
+            })
+            return loadedItems.sort((a, b) => new Date(b.date) - new Date(a.date))
+        },   
         providesTags: ['Items']
     }),
         addItem: builder.mutation({
@@ -22,7 +32,7 @@ export const apiSlice = createApi({
             query: ({ id }) => ({
                 url: `/items/${id}`,
                 method: 'DELETE',
-                body: id
+                body:  { id }
             }), 
             invalidatesTags: ['Items']
         }),
